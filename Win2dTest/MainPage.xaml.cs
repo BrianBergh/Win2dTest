@@ -38,7 +38,7 @@ namespace Win2dTest
     {
       float elapsed = (float)args.Timing.ElapsedTime.TotalSeconds; // calc once, for speed.
       scrollPos.X -= (elapsed * speed);
-      //if (scrollPos.X < -scroller_layout.DrawBounds.Width)
+      if (scrollPos.X < -scroller_layout.DrawBounds.Width)
       if (scrollPos.X < -scrollerTarget.Bounds.Width)
       {
         scrollPos.X = tw;
@@ -47,12 +47,12 @@ namespace Win2dTest
     string about = "This is just a scrolling demo";// with a very long text to see how it works on Windows Phone (Lumia 950 XL).";
     CanvasTextFormat scroller_format = new CanvasTextFormat { FontSize = 50.0f, WordWrapping = CanvasWordWrapping.NoWrap };
     CanvasTextLayout scroller_layout = null;
-    //FPSCounter fpsCounter = new FPSCounter();
+    FPSCounter fpsCounter = new FPSCounter();
     CanvasRenderTarget scrollerTarget;
     private void canvas_Draw(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedDrawEventArgs args)
     {
       args.DrawingSession.DrawImage(scrollerTarget, scrollPos);
-      //fpsCounter.Draw(args.DrawingSession);
+      fpsCounter.Draw(args.DrawingSession);
     }
     private void canvas_Loaded(object sender, RoutedEventArgs e)
     {
