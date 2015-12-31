@@ -15,9 +15,9 @@ namespace Win2dTest
     private DateTime lastTick = DateTime.Now;
     private float fps = 0;
     private float fpsCount = 0;
-    public Vector2 Position { get; set; } = new Vector2(10, 10);
+    public Vector2 Position { get; set; } = new Vector2(2, 2);
     public Color Color { get; set; } = Colors.Yellow;
-    public CanvasTextFormat TextFormat { get; set; } = new CanvasTextFormat { FontSize = 50.0f, WordWrapping = CanvasWordWrapping.NoWrap };
+    public CanvasTextFormat TextFormat { get; set; } = new CanvasTextFormat { FontSize = 12.0f, WordWrapping = CanvasWordWrapping.NoWrap };
     public FPSCounter() { }
     public FPSCounter(Vector2 position, Color color, CanvasTextFormat format) { }
     public void Draw(CanvasDrawingSession session)

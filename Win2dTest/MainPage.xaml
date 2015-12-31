@@ -2,10 +2,37 @@
     x:Class="Win2dTest.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:win2dTest"
+    xmlns:local="using:Win2dTest"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
     mc:Ignorable="d">
-    <canvas:CanvasAnimatedControl Update="canvas_Update"  Draw="canvas_Draw" Loaded="canvas_Loaded" ClearColor="Black" Name="canvas" CreateResources="canvas_CreateResources" SizeChanged="canvas_SizeChanged" />
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <TextBlock Grid.Row="0" TextWrapping="Wrap" Margin="6">
+    	<Run FontWeight="Bold" Text="Win2D Sample."/>
+    	<LineBreak/>
+    	<Run Text="This is"/>
+    	<Run Text=" a simple demo of a scrolling text."/>
+    	<LineBreak/>
+    	<Run Text="Created to test the smoothness of the render on Lumia 950 XL. Why? Because currently there is something preventing it from running smoothly, it glitches every few seconds. This might be a bug in the Windows 10 Mobile OS, or in the Win2D API. Currently i have no idea, but smooth it ain't. The sample here should help test it fast when ever a new version of Windows 10 Mobile or Win2D is released."/>
+    	<LineBreak/>
+    	<Run/>
+    	<LineBreak/>
+    	<Run Text="Last tested OS: Windows 10 Mobile build 10586.36"/>
+    	<LineBreak/>
+    	<Run Text="Last tested Win2D: "/>
+    	<Run Text="1.11.0"/>
+    </TextBlock>
+    <StackPanel Orientation="Vertical" Margin="6" Grid.Row="1">
+      <CheckBox Content="Win2D FPS" Name="chkWin2DFPS" Click="chkWin2DFPS_Click" IsChecked="True" />
+      <CheckBox Content="UWP FPS" Name="chkUWPFPS" Click="chkUWPFPS_Click" />
+      <CheckBox Content="Use RenderTarget" Name="chkRenderTarget" Click="chkRenderTarget_Click" />
+    </StackPanel>
+    <canvas:CanvasAnimatedControl VerticalAlignment="Bottom" Grid.Row="2" Update="canvas_Update"  Draw="canvas_Draw" ClearColor="Blue" Name="canvas" CreateResources="canvas_CreateResources" SizeChanged="canvas_SizeChanged" Height="75" />
+  </Grid>
 </Page>
