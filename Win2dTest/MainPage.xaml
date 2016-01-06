@@ -26,11 +26,13 @@
     	<Run Text="Last tested OS: Windows 10 Mobile build 10586.36"/>
     	<LineBreak/>
     	<Run Text="Last tested Win2D: "/>
-    	<Run Text="1.11.0"/>
+    	<Run Text="1.1"/>
+    	<Run Text="2"/>
+    	<Run Text=".0"/>
     </TextBlock>
     <StackPanel Orientation="Vertical" Margin="6" Grid.Row="1">
-      <CheckBox Content="Win2D FPS" Name="chkWin2DFPS" Click="chkWin2DFPS_Click" IsChecked="True" />
-      <CheckBox Content="UWP FPS" Name="chkUWPFPS" Click="chkUWPFPS_Click" />
+      <CheckBox Content="Win2D FPS Counter" Name="chkWin2DFPS" Click="chkWin2DFPS_Click" IsChecked="True" />
+      <CheckBox Content="UWP FPS Display" Name="chkUWPFPS" Click="chkUWPFPS_Click" />
       <CheckBox Content="Use RenderTarget" Name="chkRenderTarget" Click="chkRenderTarget_Click" />
     </StackPanel>
     <canvas:CanvasAnimatedControl VerticalAlignment="Bottom" Grid.Row="2" Update="canvas_Update"  Draw="canvas_Draw" ClearColor="Blue" Name="canvas" CreateResources="canvas_CreateResources" SizeChanged="canvas_SizeChanged" Height="75" />
