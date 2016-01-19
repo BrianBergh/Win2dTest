@@ -38,10 +38,12 @@ namespace Win2dTest
     string about = "This is just a scrolling demo with a very long text to see how it works on Windows Phone (Lumia 950 XL) vs Desktop.";
     CanvasTextFormat scroller_format = new CanvasTextFormat { FontSize = 50.0f, WordWrapping = CanvasWordWrapping.NoWrap };
     CanvasTextLayout scroller_layout = null;
-    FPSCounter fpsCounter = new FPSCounter();
+    FPSCounter DrawfpsCounter = new FPSCounter() { Color = Colors.Yellow, Header="Draw", Position = new Vector2(0,0), CountInDrawMethod = true };
+    FPSCounter UpdatefpsCounter = new FPSCounter() { Color = Colors.LightBlue, Header = "Update", Position = new Vector2(100, 0), CountInDrawMethod = false };
     CanvasRenderTarget scrollerTarget;
     bool showW2DFpsCounter = true;
-    bool useRenderTarget = false;
+    bool showW2DUpdCounter = true;
+    bool useRenderTarget = true;
 
 
     public MainPage()
@@ -52,15 +54,24 @@ namespace Win2dTest
         App.Current.Exit();
       };
 
+      canvas.IsFixedTimeStep = true;
+      canvas.TargetElapsedTime = TimeSpan.FromMilliseconds(15); // (1000/15)=66.66fps
+
     }
 
     private void canvas_Update(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedUpdateEventArgs args)
     {
       float elapsed = (float)args.Timing.ElapsedTime.TotalSeconds; // cast once, for speed.
-
       scrollPos.X -= (elapsed * speed);
       if ((useRenderTarget ? (scrollPos.X < -scrollerTarget.Bounds.Width) : (scrollPos.X < -scroller_layout.LayoutBounds.Width)))
         scrollPos.X = tw;
+#pragma warning disable CS4014 // we dont care about this
+      Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
+       {
+         chkSlow.IsChecked = args.Timing.IsRunningSlowly;
+       });
+#pragma warning restore CS4014
+      UpdatefpsCounter.CountFPS();
     }
 
     private void canvas_Draw(Microsoft.Graphics.Canvas.UI.Xaml.ICanvasAnimatedControl sender, Microsoft.Graphics.Canvas.UI.Xaml.CanvasAnimatedDrawEventArgs args)
@@ -72,7 +83,9 @@ namespace Win2dTest
         args.DrawingSession.DrawTextLayout(scroller_layout, scrollPos, Colors.White);
 
       if (showW2DFpsCounter)
-        fpsCounter.Draw(args.DrawingSession);
+        DrawfpsCounter.Draw(args.DrawingSession);
+      if (showW2DUpdCounter)
+        UpdatefpsCounter.Draw(args.DrawingSession);
 
     }
 
@@ -98,7 +111,11 @@ namespace Win2dTest
 
     private void chkWin2DFPS_Click(object sender, RoutedEventArgs e)
     {
-      showW2DFpsCounter = chkWin2DFPS.IsChecked.Value; // again, to prevent accessing this in a dispatcher (in the draw event)
+      showW2DFpsCounter = chkWin2DDrawFPS.IsChecked.Value; // again, to prevent accessing this in a dispatcher (in the draw event)
+    }
+    private void chkWin2DUpdateFPS_Click(object sender, RoutedEventArgs e)
+    {
+      showW2DUpdCounter = chkWin2DUpdateFPS.IsChecked.Value;
     }
 
     private void chkUWPFPS_Click(object sender, RoutedEventArgs e)
@@ -109,6 +126,16 @@ namespace Win2dTest
     private void chkRenderTarget_Click(object sender, RoutedEventArgs e)
     {
       useRenderTarget = chkRenderTarget.IsChecked.Value;
+    }
+
+    private void chkFixedTime_Click(object sender, RoutedEventArgs e)
+    {
+      canvas.IsFixedTimeStep = chkFixedTime.IsChecked.Value;
+    }
+
+    private void chkFasterFixedTime_Click(object sender, RoutedEventArgs e)
+    {
+      canvas.TargetElapsedTime = TimeSpan.FromMilliseconds(chkFasterFixedTime.IsChecked.Value ? 15d : 16.66666d);
     }
   }
 }

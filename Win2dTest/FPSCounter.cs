@@ -18,23 +18,28 @@ namespace Win2dTest
     public Vector2 Position { get; set; } = new Vector2(2, 2);
     public Color Color { get; set; } = Colors.Yellow;
     public CanvasTextFormat TextFormat { get; set; } = new CanvasTextFormat { FontSize = 12.0f, WordWrapping = CanvasWordWrapping.NoWrap };
-    public FPSCounter() { }
-    public FPSCounter(Vector2 position, Color color, CanvasTextFormat format) { }
+    public string Header { get; set; } = null;
+    public bool CountInDrawMethod { get; set; } = false;
+    public void CountFPS()
+    {
+      TimeSpan ft = (DateTime.Now - lastTick);
+      if (ft.TotalMilliseconds >= 1000)
+      {
+        fps = fpsCount;
+        fpsCount = 0;
+        lastTick = DateTime.Now;
+      }
+      else {
+        fpsCount++;
+      }
+    }
     public void Draw(CanvasDrawingSession session)
     {
       try
       {
-        TimeSpan ft = (DateTime.Now - lastTick);
-        if (ft.TotalSeconds >= 1)
-        {
-          fps = fpsCount;
-          fpsCount = 0;
-          lastTick = DateTime.Now;
-        }
-        else {
-          fpsCount++;
-        }
-        session.DrawText(fps.ToString("0") + " FPS", Position, Color, TextFormat);
+        if (CountInDrawMethod)
+          CountFPS();
+        session.DrawText((string.IsNullOrEmpty(Header) ? "" : Header +":") + fps.ToString("0") + " FPS", Position, Color, TextFormat);
       }
       catch
       { }
