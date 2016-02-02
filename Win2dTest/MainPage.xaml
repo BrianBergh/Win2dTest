@@ -24,20 +24,20 @@
     	<Run/>
     	<LineBreak/>
     	<Run Text="Last tested OS: Windows 10 Mobile build 10586."/>
-    	<Run Text="63"/>
+    	<Run Text="71"/>
     	<LineBreak/>
     	<Run Text="Last tested Win2D: "/>
-    	<Run Text="1.1"/>
-    	<Run Text="4"/>
-    	<Run Text=".0"/>
+    	<Run Text="1.16.0"/>
+    	<LineBreak/>
+    	<Run Text="Status: Still lags/glitches and raise isRunningSlowly"/>
     </TextBlock>
     <StackPanel Orientation="Vertical" Margin="6" Grid.Row="1">
       <CheckBox Content="Win2D DRAW FPS Counter" Name="chkWin2DDrawFPS" Click="chkWin2DFPS_Click" IsChecked="True" />
       <CheckBox Content="Win2D UPDATE FPS Counter" Name="chkWin2DUpdateFPS" Click="chkWin2DUpdateFPS_Click"  IsChecked="True" />
       <CheckBox Content="UWP FPS Display" Name="chkUWPFPS" Click="chkUWPFPS_Click" />
       <CheckBox Content="Use RenderTarget" Name="chkRenderTarget" Click="chkRenderTarget_Click" IsChecked="True" />
-      <CheckBox Content="Fixed time" Name="chkFixedTime" Click="chkFixedTime_Click" IsChecked="True" />
-      <CheckBox Content="Faster fixed time" Name="chkFasterFixedTime" Click="chkFasterFixedTime_Click"  IsChecked="True" />
+      <CheckBox Content="Fixed time" Name="chkFixedTime" Click="chkFixedTime_Click" />
+      <CheckBox Content="Faster fixed time" Name="chkFasterFixedTime" Click="chkFasterFixedTime_Click" />
       <CheckBox Content="Is Running Slowly" Name="chkSlow" IsEnabled="False" />
     </StackPanel>
     <canvas:CanvasAnimatedControl VerticalAlignment="Bottom" Grid.Row="2" Update="canvas_Update" Draw="canvas_Draw" ClearColor="Blue" Name="canvas" CreateResources="canvas_CreateResources" SizeChanged="canvas_SizeChanged" Height="75" />

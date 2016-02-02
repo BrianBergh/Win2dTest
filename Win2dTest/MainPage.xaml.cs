@@ -54,8 +54,8 @@ namespace Win2dTest
         App.Current.Exit();
       };
 
-      canvas.IsFixedTimeStep = true;
-      canvas.TargetElapsedTime = TimeSpan.FromMilliseconds(15); // (1000/15)=66.66fps
+      canvas.IsFixedTimeStep = chkFixedTime.IsChecked.Value; //true;
+      canvas.TargetElapsedTime = TimeSpan.FromMilliseconds(16.6666); // (1000/15)=66.66fps
 
     }
 
