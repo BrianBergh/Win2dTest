@@ -23,13 +23,13 @@
     	<LineBreak/>
     	<Run/>
     	<LineBreak/>
-    	<Run Text="Last tested OS: Windows 10 Mobile build 10586."/>
-    	<Run Text="71"/>
+        <Run Text="Last tested on:" />
+        <LineBreak/>
+    	<Run Text="WinOS:10.0.14295.1000"/>
     	<LineBreak/>
-    	<Run Text="Last tested Win2D: "/>
-    	<Run Text="1.16.0"/>
+    	<Run Text="Win2D:1.16.0"/>
     	<LineBreak/>
-    	<Run Text="Status: Still lags/glitches and raise isRunningSlowly"/>
+    	<Run Text="Status: Still framedrop"/>
     </TextBlock>
     <StackPanel Orientation="Vertical" Margin="6" Grid.Row="1">
       <CheckBox Content="Win2D DRAW FPS Counter" Name="chkWin2DDrawFPS" Click="chkWin2DFPS_Click" IsChecked="True" />
@@ -40,6 +40,6 @@
       <CheckBox Content="Faster fixed time" Name="chkFasterFixedTime" Click="chkFasterFixedTime_Click" />
       <CheckBox Content="Is Running Slowly" Name="chkSlow" IsEnabled="False" />
     </StackPanel>
-    <canvas:CanvasAnimatedControl VerticalAlignment="Bottom" Grid.Row="2" Update="canvas_Update" Draw="canvas_Draw" ClearColor="Blue" Name="canvas" CreateResources="canvas_CreateResources" SizeChanged="canvas_SizeChanged" Height="75" />
-  </Grid>
+        <canvas:CanvasAnimatedControl VerticalAlignment="Bottom" Grid.Row="2" Update="canvas_Update" Draw="canvas_Draw" ClearColor="Blue" Name="canvas" CreateResources="canvas_CreateResources" SizeChanged="canvas_SizeChanged" Height="75" />
+    </Grid>
 </Page>
